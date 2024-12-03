@@ -13,7 +13,7 @@ class Smiley:
         # We have encapsulated the SenseHat object
         self.sense_hat = SenseHat()
 
-        self.complexion = complexion
+        # self.complexion = complexion
         self.my_complexion = complexion
 
         X = self.my_complexion
@@ -29,9 +29,12 @@ class Smiley:
             O, X, X, X, X, X, X, O,
         ]
 
-    def complexion(self):
-        my_complexion = self.complexion
-        return my_complexion
+    #def complexion(self):
+       # my_complexion = self.complexion
+        #return my_complexion
+
+    def get_complexion(self):
+        return self.my_complexion
 
 
     def dim_display(self, dimmed=True):

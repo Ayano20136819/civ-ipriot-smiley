@@ -27,5 +27,5 @@ class Angry(Smiley):
             if wide_open:
                 eyes = self.BLANK
             else:
-                eyes = self.complexion
+                eyes = self.get_complexion()
             self.pixels[pixel] = eyes

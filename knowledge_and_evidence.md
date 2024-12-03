@@ -120,13 +120,13 @@ python3 main.py
    | ------------             |------|
    | self.pixels              | List |
    | A member of self.pixels  | Tuple |
-   | self                     | Parameter     |
+   | self                     | **Smiley (class instance)**     |
 
 3. Examine the code for `smiley.py`, `sad.py`, and `happy.py`. Give an example of each of the following control structures using an example from **each** of these files. Include the first line and the line range:
 
    | Control Flow | File   | First line | Line range   |
    | ------------ |--------| ------- |--------------|
-   |  sequence    | sad.py | mouth = [49, 54, 42, 43, 44, 45]| line 31      |
+   |  sequence    | sad.py | mouth = [49, 54, 42, 43, 44, 45]| **line 31 - 33**  |
    |  selection   | sad.py | if wide_open: | line 42 - 45 |
    |  iteration   | sad.py | for pixel in mouth: | line 32 - 33 |
 
@@ -139,27 +139,76 @@ python3 main.py
    | str                     | No    | greet = "Hello"  |
    | bool                    | Yes   | wide_open = True |
 
-5. Examining `smiley.py`, provide an example of a class variable and an instance variable (attribute). Explain **why** one is defined as a class variable and the other as an instance variable.
+5. Examining `smiley.py`, provide an example of a class variable and an instance variable (attribute). 
+Explain **why** one is defined as a class variable and the other as an instance variable.
 
-> Class variable is "WHITE = (255, 255, 255)", and instance variable is "dimmed" in smiley.py.
-> Class variables have the same value for all instances, while instance variables have a 
-> different value for each instance. 
+> **Class variable is "WHITE = (255, 255, 255)"
+> Why: a class variable is shared by all instances of that class.
+> WHITE indicates a colour definition that does not change for individual instances. 
+> It is defined at class level as it is a constant value used by all instances of the Smiley class.
+>**
 > 
-> Class variableはすべてのインスタンスが同じ値を持ち、instance variableはインスタンスごとに値が変わる。
+> **Instance variable: self.complexion
+> Why: Instance variables are specific to each instance of that class. 
+> self.complexion represents the colour of a particular smiley object's complexion. 
+> It is defined without the __init__ method and is prefixed by self, so it is an attribute tied to the individual instance. 
+> As each smiley can have a different complexion, it must be stored separately for each instance.
+>**
+> 
+> Class variable: クラス変数はそのクラスのすべてのインスタンスで共有される。WHITEは個々のインスタンスで変化しない色の定義を示しています。
+> Smileyクラスのすべてのインスタンスで使用される定数値であるためクラスレベルで定義されます。
+> 
+> Instance variable: インスタンス変数はそのクラスの各インスタンスに特有のものです。
+> self.complexionは特定のスマイリーオブジェクトの顔色を表します。これは__init__メゾットないで定義され、selfが先頭につくので、
+> 個々のインスタンスに結びついた属性になります。それぞれのスマイリーは異なる顔色を持つことができるため、インスタンスごとに別々に保存する必要があります。
 
 6. Examine `happy.py`, and identify the constructor (initializer) for the `Happy` class:
    1. What is the purpose of a constructor (in general) and this one (in particular)?
 
    > Happy class's constructor is : def __init__(self):
-   > a general purpose : constructor is to initialize data when an object is created.
-   > a particular purpose : to add two methods (draw_mouth(),draw_eyes())
+   > 
+   > **General purpose : A constructor initializes an object’s attributes and performs any 
+   > setup required when the object is created. 
+   > It is called automatically when a new instance of a class is created.
+   >** 
+   > 
+   > **Particular purpose : The Happy class's constructor calls the super().__init__() 
+   > method to initialize attributes inherited from the Smiley class. 
+   > It immediately invokes the draw_mouth() and draw_eyes() methods to render the happy face’s mouth and eyes. These methods modify the pixels attribute (from the parent class Smiley) to display a happy expression.
+   >** 
+   > 
+   > Clarification: The methods draw_mouth() and draw_eyes() are not added by the constructor.
+   > they are already defined as part of the class. 
+   > The constructor runs these methods during initialization to customize the object's pixels attribute, 
+   > ensuring the smiley face is displayed with a happy expression upon creation.
+   >
+   >General: コンストラクターはオブジェクトの属性を初期化し、オブジェクトの作成時に必要な設定を行う。
+   > コンストラクターはクラスの新しいインスタンスが作成されたときに自動的に呼び出されます。
+   > Particular: Happyクラスのコンストラクターはsuper().__init__メソッドを呼び出します。
+   > また、すぐにdraw_mouth()メソッドとdraw_eyes()メソッドを呼び出して幸せな表情の目と口を描画します。
+   > これらのメソッドは親クラスであるSmileyのpixels属性を変更して幸せな表情を表しています。
    
 
    2. What statement(s) does it execute (consider the `super` call), and what is the result?
 
-   > The Happy class is a child class of Smiley and Blinkable, so it inherits the attributes and methods of Happy and Blinkable in super().
+   > **Executed Statements by super().__init__():
+   > self.sense_hat = SenseHat()
+   > self.complexion = complexion
+   > self.my_complexion = complexion
+   > Local variable X and O are initialized
+   > self.pixels = [...] initializes the smiley's pixel layout.**
    > 
-   >HappyクラスはSmileyとBlinkableの子クラスなので、super()でHappyとBlinkableの属性とメゾットを継承します。 
+   > **Result:
+   > The Happy object inherits and initialises all the following attributes from the Smiley 
+   > class:
+   > The Happy object now has access to the SenseHat for controlling the hardware display.
+   > These attributes determine the "skin" color of the smiley. (default is YELLOW) (self.complexion, self.my_complexion).
+   > Default pixel layout representing the smiley face (self.pixels).
+   >** 
+   >happyオブジェクトはスマイリークラスから以下の属性をすべて継承し、初期化します。
+   > Happyオブジェクトは、ハードウェア・ディスプレイを制御するSenseHatにアクセスできるようになった。
+   > 顔色の属性
+   > スマイリーフェイスを表すデフォルトのピクセルレイアウト
 
 ### Code style
 
@@ -167,7 +216,15 @@ python3 main.py
    
 > The official Python style guide, PEP8, is used. 
 >The Sense HAT code focuses more on performance and user documentation and less on verbose documentation.
->
+> **Although smiley.py does not use debugging or logging, the SenseHat code has extensive 
+> logging capabilities through the logging module, 
+> which is important for performance monitoring and debugging. 
+> These differences suggest that Smiley focuses on clarity and simplicity, while SenseHat is designed for more productive purposes.
+>**
+> smiley.pyではデバッグやロギングを使用することはないが、
+> SenseHatのコードにはロギングモジュールによる広範囲なロギング機能があり、これはパフォーマンス監視やデバッグに重要です。
+> これらの違いから、Smileyは明確さとシンプルさに重点をおいており、SenseHatはより生産的な目的のために設計されていると思われる。
+> 
 >Pythonの公式スタイルガイドであるPEP8が使われています。
 >Sense HATのコードではパフォーマンスとユーザードキュメンテーションに重点をおいているので、詳細な記録にはあまり重点をおいていない。
 >
@@ -227,11 +284,21 @@ python3 main.py
 
 3. What is the name of the process of deriving from base classes? What is its purpose in this project? (Max 150 words)
 
-> Inheritance
+
+> **Inheritance from a base class is called inheritance. 
+> In this project, inheritance is used to create child classes of the Smiley classes Happy and Sad. 
+> These child classes inherit common attributes and methods such as pixels and show() from the Smiley class. 
+> Child classes do not need to redefine basic functions such as pixel display, thus reducing code duplication. 
+> Instead, they can concentrate on customising specific functions such as draw_eyes() and draw_mouth(). 
+> Inheritance in this project improves maintainability by making it easier to change the behaviour shared by the base class (Smiley) without having to change each child class separately. 
+> It also allows for extending functionality in a structured way, allowing different Smiley types to be created on a common basis while maintaining clarity and simplicity.
+>**
 > 
-> Creating child classes from an abstract class allows inheritance of the same attributes and methods, which reduces code duplication, increases readability and makes it easier to modify the code.
->
->抽象的なクラスから子クラスを作成することで同じ属性やメゾットを継承することができるので、コードの重複が少なくなり可読性が上がりコードの修正もし易くなる。
+> 基本クラスから継承することを継承という。このプロジェクトでは、継承を使用して Happy や Sad といった Smiley クラスの子クラスを作成する。
+> これらの子クラスは Smiley クラスから pixels や show() などの共通の属性やメソッドを継承する。子クラスはピクセル表示のような基本的な機能を再定義する必要がないので、コードの重複を減らすことができる。
+> その代わりに、draw_eyes()やdraw_mouth()のような特定の機能のカスタマイズに集中することができる。 
+> このプロジェクトにおける継承は、それぞれの子クラスを個別に変更することなく、基本クラス（Smiley）で共有されている動作を簡単に変更できるようにすることで、メンテナンス性を向上させる。
+> また、構造化された方法で機能を拡張することができ、明快さとシンプルさを維持しながら、共通の基盤に基づいて異なるスマイリータイプを作成することができる。
 
 
 ### Compare and contrast classes
