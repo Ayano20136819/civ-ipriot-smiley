@@ -12,8 +12,6 @@ class Smiley:
     def __init__(self, complexion=YELLOW):
         # We have encapsulated the SenseHat object
         self.sense_hat = SenseHat()
-
-        # self.complexion = complexion
         self.my_complexion = complexion
 
         X = self.my_complexion
@@ -28,10 +26,6 @@ class Smiley:
             X, X, X, X, X, X, X, X,
             O, X, X, X, X, X, X, O,
         ]
-
-    #def complexion(self):
-       # my_complexion = self.complexion
-        #return my_complexion
 
     def get_complexion(self):
         return self.my_complexion

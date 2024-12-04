@@ -40,11 +40,9 @@ class Sad(Smiley):
         eyes = [10, 13, 18, 21]
         for pixel in eyes:
             if wide_open:
-                #eyes = self.BLANK
                 self.pixels[pixel] = self.BLANK
             else:
                 self.pixels[pixel] = self.get_complexion()
-                #eyes = self.complexion
-            #self.pixels[pixel] = eyes
+
 
 

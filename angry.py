@@ -25,7 +25,6 @@ class Angry(Smiley):
         eyes = [9,10, 18, 13, 14,21]
         for pixel in eyes:
             if wide_open:
-                eyes = self.BLANK
+                self.pixels[pixel] = self.BLANK
             else:
-                eyes = self.get_complexion()
-            self.pixels[pixel] = eyes
+                self.pixels[pixel] = self.get_complexion()
