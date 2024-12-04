@@ -174,7 +174,8 @@ Explain **why** one is defined as a class variable and the other as an instance 
    > 
    > **Particular purpose : The Happy class's constructor calls the super().__init__() 
    > method to initialize attributes inherited from the Smiley class. 
-   > It immediately invokes the draw_mouth() and draw_eyes() methods to render the happy face’s mouth and eyes. These methods modify the pixels attribute (from the parent class Smiley) to display a happy expression.
+   > It immediately invokes the draw_mouth() and draw_eyes() methods to render the happy face’s mouth and eyes. 
+   > These methods modify the pixels attribute (from the parent class Smiley) to display a happy expression.
    >** 
    > 
    > Clarification: The methods draw_mouth() and draw_eyes() are not added by the constructor.
